@@ -2,6 +2,7 @@
 title: "Next.js でブログを作りました"
 date: "2022-03-30"
 topics: ["blog", "Next.js"]
+icon: "fa-solid fa-paw"
 ---
 
 # なぜ作ったのか

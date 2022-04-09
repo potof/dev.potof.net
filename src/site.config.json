@@ -7,5 +7,6 @@
   "url": "https://dev.potof.net/",
   "gtag": "G-JQP5KW497M",
   "isViewRelatedPosts": true,
-  "relatedPostsMaxCount": 3
+  "relatedPostsMaxCount": 3,
+  "defaultPostIcon": "fa-solid fa-folder-open"
 }

@@ -14,6 +14,11 @@ export default class MyDocument extends Document {
           {/* Inject MUI styles first to match with the prepend: true configuration. */}
           {(this.props as any).emotionStyleTags}
           <link rel="icon" href="/favicon.ico" />
+          <script
+            async
+            src="https://kit.fontawesome.com/dfbf35e63b.js"
+            crossOrigin="anonymous"
+          ></script>
         </Head>
         <body>
           <Main />

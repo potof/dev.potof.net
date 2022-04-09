@@ -34,6 +34,47 @@ https://fontawesome.com/icons/paw?s=solid
 }
 ```
 
+# ランダムカラーモード
+
+記事名からアイコンカラーを計算する機能も追加しました。
+`true` にするとランダム、`false` にするとサイトのプライマリカラーです。
+
+```json:site.config.json
+{
+  ...
+  "randomColorPostIcon": true
+}
+```
+
+## 実装
+
+タイトル文字列から各文字のコードを取得して足していき、hsl を使って色調整をしています。
+
+```typescript:slugCard.tsx
+const stringToNumber = (str: string): number =>
+  Array.from(str)
+    .map((ch) => ch.charCodeAt(0))
+    .reduce((a, b) => a + b);
+const iconColorNum = stringToNumber(title) % 360;
+const iconColorHsl = config.randomColorPostIcon
+  ? `hsl(${iconColorNum}, 40%, 60%)`
+  : "";
+```
+
+`<Icon>` コンポーネントは `sx={{ color: "" }}` だと `color="primary"` が優先されます。
+
+```typescript:slugCard.tsx
+<Icon
+  className={icon || config.defaultPostIcon}
+  color="primary"
+  sx={{
+    fontSize: "40px",
+    m: 2,
+    color: iconColorHsl,
+  }}
+/>
+```
+
 # 困ったこと
 
 ## Google Material Icons のフォントサイズが変更できない
@@ -53,7 +94,7 @@ Web Font のアイコンセットを利用することにしました。
 https://mui.com/material-ui/icons/
 
 公式サイトに書いてあるとおり、フォントサイズは変更されません。
-MUI の Issue として挙げられており、解決策も書いてありますがわざわざ `jsx` パッケージを入れるぐらいであれば、素直に fontawesome を利用することにしました。
+MUI の Issue として挙げられており、解決策も書いてありますがあとから見たときにわからなくなると思ったので素直に fontawesome を利用することにしました。
 
 https://github.com/mui/material-ui/issues/19746
 
